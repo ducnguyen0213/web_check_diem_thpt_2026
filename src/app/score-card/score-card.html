@@ -1,0 +1,45 @@
+<section class="card">
+  <header class="card-header">
+    <h2>Kết quả thi</h2>
+    <span class="sbd-badge">SBD: {{ sbd() }}</span>
+  </header>
+
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th>Môn thi</th>
+        <th class="score-col">Điểm</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.label) {
+        <tr>
+          <td>{{ row.label }}</td>
+          <td class="score-col score-value">{{ formatScore(row.score) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+@if (combinations().length > 0) {
+  <section class="card">
+    <header class="card-header">
+      <h2>Điểm tổ hợp xét tuyển</h2>
+    </header>
+    <ul class="combo-list">
+      @for (combo of combinations(); track combo.code) {
+        <li class="combo-item">
+          <div class="combo-info">
+            <span class="combo-code">{{ combo.code }}</span>
+            <span class="combo-detail">{{ combo.detail }}</span>
+          </div>
+          <span class="combo-total">{{ formatScore(combo.total) }}</span>
+        </li>
+      }
+    </ul>
+    <p class="combo-note">
+      Tổng điểm 3 môn, chưa gồm điểm ưu tiên/khuyến khích.
+    </p>
+  </section>
+}

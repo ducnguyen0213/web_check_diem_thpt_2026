@@ -1,0 +1,52 @@
+<div class="page">
+  <header class="hero">
+    <h1>Tra cứu điểm thi tốt nghiệp THPT 2026</h1>
+    <p class="hero-sub">Nhập số báo danh 8 chữ số để xem kết quả</p>
+  </header>
+
+  <main class="content">
+    <form class="search-box" (submit)="$event.preventDefault(); search()">
+      <input
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        placeholder="Ví dụ: 01000001"
+        aria-label="Số báo danh"
+        [value]="sbd()"
+        (input)="onInput($event)"
+      />
+      <button type="submit" [disabled]="!isValid || status() === 'loading'">
+        @if (status() === 'loading') {
+          Đang tra…
+        } @else {
+          Tra cứu
+        }
+      </button>
+    </form>
+
+    @if (sbd().length > 0 && !isValid) {
+      <p class="hint">Số báo danh gồm đúng 8 chữ số ({{ sbd().length }}/8)</p>
+    }
+
+    @switch (status()) {
+      @case ('found') {
+        <app-score-card [sbd]="resultSbd()" [record]="record()!" />
+      }
+      @case ('notfound') {
+        <div class="message message-warn">
+          Không tìm thấy số báo danh <strong>{{ resultSbd() }}</strong>.
+          Vui lòng kiểm tra lại.
+        </div>
+      }
+      @case ('error') {
+        <div class="message message-error">
+          Không tải được dữ liệu. Vui lòng kiểm tra kết nối mạng và thử lại.
+        </div>
+      }
+    }
+  </main>
+
+  <footer class="footer">
+    <p>Dữ liệu điểm thi tốt nghiệp THPT năm 2026 · {{ currentYear }}</p>
+  </footer>
+</div>

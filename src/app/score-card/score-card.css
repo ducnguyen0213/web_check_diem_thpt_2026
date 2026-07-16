@@ -1,0 +1,118 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.card-header h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sbd-badge {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.score-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 0.5rem 0.25rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.score-table td {
+  padding: 0.6rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.score-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.score-col {
+  text-align: right;
+  width: 5.5rem;
+}
+
+.score-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.combo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.combo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.combo-item:last-child {
+  border-bottom: none;
+}
+
+.combo-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.combo-code {
+  font-weight: 700;
+  color: var(--text);
+  min-width: 2.6rem;
+}
+
+.combo-detail {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.combo-total {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.combo-note {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
