@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import {
   COMBINATIONS,
   FOREIGN_LANGUAGES,
+  PROVINCES,
   ScoreRecord,
   SUBJECT_LABELS,
   SUBJECTS,
@@ -26,6 +27,11 @@ interface CombinationRow {
 export class ScoreCard {
   readonly sbd = input.required<string>();
   readonly record = input.required<ScoreRecord>();
+
+  /** Tên tỉnh/thành theo 2 chữ số đầu SBD (hội đồng thi) */
+  readonly province = computed<string | null>(
+    () => PROVINCES[this.sbd().slice(0, 2)] ?? null,
+  );
 
   /** Các môn thí sinh có điểm, theo thứ tự chuẩn */
   readonly rows = computed<SubjectRow[]>(() => {
