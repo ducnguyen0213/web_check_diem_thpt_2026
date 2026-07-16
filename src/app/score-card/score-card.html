@@ -4,6 +4,10 @@
     <span class="sbd-badge">SBD: {{ sbd() }}</span>
   </header>
 
+  @if (province(); as province) {
+    <p class="province">Hội đồng thi: {{ province }}</p>
+  }
+
   <table class="score-table">
     <thead>
       <tr>
