@@ -32,6 +32,12 @@
   font-size: 0.9rem;
 }
 
+.province {
+  margin: -0.35rem 0 0.6rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
 .score-table {
   width: 100%;
   border-collapse: collapse;
