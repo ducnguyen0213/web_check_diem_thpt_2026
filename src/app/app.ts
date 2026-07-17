@@ -22,6 +22,21 @@ export class App {
 
   protected readonly currentYear = new Date().getFullYear();
 
+  /** Chế độ nhúng (?embed=1): ẩn tiêu đề và footer khi đặt trong iframe */
+  protected readonly embed = signal(false);
+
+  constructor() {
+    const params = new URLSearchParams(window.location.search);
+    this.embed.set(params.get('embed') === '1');
+
+    // Cho phép trang ngoài truyền SBD qua URL: /?sbd=01000001
+    const sbd = (params.get('sbd') ?? '').replace(/\D/g, '').slice(0, 8);
+    if (/^\d{8}$/.test(sbd)) {
+      this.sbd.set(sbd);
+      void this.search();
+    }
+  }
+
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     // Chỉ giữ chữ số, tối đa 8 ký tự

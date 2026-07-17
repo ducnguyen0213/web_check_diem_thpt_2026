@@ -1,8 +1,10 @@
 <div class="page">
-  <header class="hero">
-    <h1>Tra cứu điểm thi tốt nghiệp THPT 2026</h1>
-    <p class="hero-sub">Nhập số báo danh 8 chữ số để xem kết quả</p>
-  </header>
+  @if (!embed()) {
+    <header class="hero">
+      <h1>Tra cứu điểm thi tốt nghiệp THPT 2026</h1>
+      <p class="hero-sub">Nhập số báo danh 8 chữ số để xem kết quả</p>
+    </header>
+  }
 
   <main class="content">
     <form class="search-box" (submit)="$event.preventDefault(); search()">
@@ -46,7 +48,9 @@
     }
   </main>
 
-  <footer class="footer">
-    <p>Dữ liệu điểm thi tốt nghiệp THPT năm 2026 · {{ currentYear }}</p>
-  </footer>
+  @if (!embed()) {
+    <footer class="footer">
+      <p>Dữ liệu điểm thi tốt nghiệp THPT năm 2026 · {{ currentYear }}</p>
+    </footer>
+  }
 </div>
