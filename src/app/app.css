@@ -29,10 +29,16 @@
   flex: 1;
 }
 
+/* Chế độ nhúng: cao đúng bằng nội dung để iframe ngoài đo được chính xác */
+.embedded {
+  min-height: auto;
+}
+
 /* Chế độ nhúng: không còn hero phía trên nên bỏ margin âm, cột rộng hơn */
 .embedded .content {
   width: min(720px, 100% - 2rem);
   margin-top: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .search-box {

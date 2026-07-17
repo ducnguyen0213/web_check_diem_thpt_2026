@@ -32,6 +32,16 @@ export class App {
     const params = new URLSearchParams(window.location.search);
     this.embed.set(params.get('embed') === '1');
 
+    if (this.embed()) {
+      // Báo chiều cao thực cho trang nhúng để iframe bên ngoài tự giãn theo nội dung
+      const report = () =>
+        window.parent.postMessage(
+          { type: 'diemthi-height', height: document.body.scrollHeight },
+          '*',
+        );
+      new ResizeObserver(report).observe(document.body);
+    }
+
     // Cho phép trang ngoài truyền SBD qua URL: /?sbd=01000001
     const sbd = (params.get('sbd') ?? '').replace(/\D/g, '').slice(0, 8);
     if (/^\d{8}$/.test(sbd)) {
