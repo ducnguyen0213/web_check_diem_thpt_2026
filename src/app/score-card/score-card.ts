@@ -45,6 +45,14 @@ export class ScoreCard {
     }));
   });
 
+  /** Điểm trung bình các môn có điểm */
+  readonly average = computed<number | null>(() => {
+    const rows = this.rows();
+    if (rows.length === 0) return null;
+    const sum = rows.reduce((acc, row) => acc + row.score, 0);
+    return sum / rows.length;
+  });
+
   /** Các tổ hợp xét tuyển thí sinh có đủ 3 môn, xếp giảm dần theo tổng điểm */
   readonly combinations = computed<CombinationRow[]>(() => {
     const record = this.record();

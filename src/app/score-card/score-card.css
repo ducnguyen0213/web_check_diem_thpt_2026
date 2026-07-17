@@ -63,6 +63,13 @@
   border-bottom: none;
 }
 
+.average-row td {
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+  font-weight: 700;
+}
+
 .score-col {
   text-align: right;
   width: 5.5rem;

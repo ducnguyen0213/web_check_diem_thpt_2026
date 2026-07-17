@@ -23,6 +23,14 @@
         </tr>
       }
     </tbody>
+    @if (average(); as average) {
+      <tfoot>
+        <tr class="average-row">
+          <td>Điểm trung bình</td>
+          <td class="score-col score-value">{{ formatScore(average) }}</td>
+        </tr>
+      </tfoot>
+    }
   </table>
 </section>
 
