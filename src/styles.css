@@ -26,3 +26,16 @@ body {
   color: var(--text);
   line-height: 1.4;
 }
+
+/* Chế độ nhúng: bỏ nền xám; cho phép cuộn nếu iframe không đủ cao */
+html.embed,
+body.embed {
+  background: transparent;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.embed {
+  overflow-x: hidden;
+}

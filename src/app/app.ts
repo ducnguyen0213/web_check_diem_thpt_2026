@@ -33,12 +33,29 @@ export class App {
     this.embed.set(params.get('embed') === '1');
 
     if (this.embed()) {
-      // Báo chiều cao thực cho trang nhúng để iframe bên ngoài tự giãn theo nội dung
-      const report = () =>
-        window.parent.postMessage(
-          { type: 'diemthi-height', height: document.body.scrollHeight },
-          '*',
+      document.documentElement.classList.add('embed');
+      document.body.classList.add('embed');
+
+      const report = () => {
+        const height = Math.ceil(
+          Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight,
+          ),
         );
+
+        // Cùng origin: tự chỉnh chiều cao iframe ngay, không cần code ở trang cha
+        try {
+          const frame = window.frameElement as HTMLElement | null;
+          if (frame) frame.style.height = `${height}px`;
+        } catch {
+          // Khác origin: không truy cập được frameElement, dùng postMessage bên dưới
+        }
+
+        // Khác origin: gửi chiều cao để trang cha tự set (cần listener ở trang cha)
+        window.parent.postMessage({ type: 'diemthi-height', height }, '*');
+      };
+
       new ResizeObserver(report).observe(document.body);
     }
 

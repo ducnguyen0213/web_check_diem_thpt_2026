@@ -29,9 +29,12 @@
   flex: 1;
 }
 
-/* Chế độ nhúng: cao đúng bằng nội dung để iframe ngoài đo được chính xác */
+/* Chế độ nhúng: cao đúng bằng nội dung, không nền xám quanh thẻ kết quả */
 .embedded {
   min-height: auto;
+  height: auto;
+  background: transparent;
+  overflow: visible;
 }
 
 /* Chế độ nhúng: không còn hero phía trên nên bỏ margin âm, cột rộng hơn */
