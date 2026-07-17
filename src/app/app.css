@@ -24,7 +24,7 @@
 }
 
 .content {
-  width: min(560px, 100% - 2rem);
+  width: min(720px, 100% - 2rem);
   margin: -1.5rem auto 0;
   flex: 1;
 }
@@ -39,7 +39,7 @@
 
 /* Chế độ nhúng: không còn hero phía trên nên bỏ margin âm, cột rộng hơn */
 .embedded .content {
-  width: min(720px, 100% - 2rem);
+  width: min(900px, 100% - 2rem);
   margin-top: 0.5rem;
   padding-bottom: 1rem;
 }

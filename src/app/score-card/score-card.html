@@ -9,6 +9,10 @@
   }
 
   <table class="score-table">
+    <colgroup>
+      <col class="subject-col" />
+      <col class="score-col" />
+    </colgroup>
     <thead>
       <tr>
         <th>Môn thi</th>
@@ -34,24 +38,25 @@
   </table>
 </section>
 
-@if (combinations().length > 0) {
-  <section class="card">
-    <header class="card-header">
-      <h2>Điểm tổ hợp xét tuyển</h2>
-    </header>
-    <ul class="combo-list">
-      @for (combo of combinations(); track combo.code) {
-        <li class="combo-item">
-          <div class="combo-info">
-            <span class="combo-code">{{ combo.code }}</span>
-            <span class="combo-detail">{{ combo.detail }}</span>
-          </div>
-          <span class="combo-total">{{ formatScore(combo.total) }}</span>
-        </li>
-      }
-    </ul>
-    <p class="combo-note">
-      Tổng điểm 3 môn, chưa gồm điểm ưu tiên/khuyến khích.
-    </p>
-  </section>
+@if (average(); as average) {
+  @if (activeDiscount(); as discount) {
+    <div class="offer-box">
+      <div class="offer-content">
+        <p class="offer-label">Giảm ngay</p>
+        <p class="offer-amount">{{ formatCurrency(discount.amount) }}</p>
+        <p class="offer-meta">
+          Với điểm trung bình <strong class="offer-highlight">{{ formatScore(average) }}</strong>
+          • Áp dụng tại <strong class="offer-highlight">Hoàng Long Computer</strong>
+        </p>
+      </div>
+      <a
+        class="offer-btn"
+        [href]="shopUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Mua ngay
+      </a>
+    </div>
+  }
 }

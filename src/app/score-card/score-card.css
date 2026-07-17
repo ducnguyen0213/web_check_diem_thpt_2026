@@ -1,9 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .card {
   background: var(--surface);
   border: none;
   border-radius: 14px;
   padding: 1.25rem;
-  margin-top: 1rem;
   box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
 }
 
@@ -41,16 +47,21 @@
 .score-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .score-table th {
-  text-align: left;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text-muted);
   padding: 0.5rem 0.25rem;
   border-bottom: 2px solid var(--border);
+}
+
+.score-table th:first-child,
+.score-table td:first-child {
+  text-align: left;
 }
 
 .score-table td {
@@ -70,9 +81,25 @@
   font-weight: 700;
 }
 
+.subject-col {
+  width: auto;
+}
+
 .score-col {
+  width: 6rem;
+}
+
+.score-table th.score-col,
+.score-table td.score-col {
   text-align: right;
-  width: 5.5rem;
+  padding: 0.6rem 0.25rem;
+  letter-spacing: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-table th.score-col {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .score-value {
@@ -81,51 +108,83 @@
   color: var(--accent);
 }
 
-.combo-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.combo-item {
+.offer-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.55rem 0;
-  border-bottom: 1px solid var(--border);
+  gap: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #bbf7d0;
+  background: #f8fff8;
 }
 
-.combo-item:last-child {
-  border-bottom: none;
+.offer-content {
+  flex: 1;
+  min-width: 0;
 }
 
-.combo-info {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.combo-code {
-  font-weight: 700;
-  color: var(--text);
-  min-width: 2.6rem;
-}
-
-.combo-detail {
+.offer-label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  line-height: 1.2;
 }
 
-.combo-total {
-  font-weight: 700;
+.offer-amount {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1.875rem, 5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #15803d;
   font-variant-numeric: tabular-nums;
-  color: var(--accent);
+  letter-spacing: -0.02em;
 }
 
-.combo-note {
-  margin-top: 0.6rem;
-  font-size: 0.8rem;
+.offer-meta {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
   color: var(--text-muted);
+}
+
+.offer-highlight {
+  font-weight: 700;
+  color: #15803d;
+}
+
+.offer-btn {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 0.9rem 1.6rem;
+  border-radius: 10px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.offer-btn:hover {
+  background: #be123c;
+}
+
+@media (max-width: 520px) {
+  .offer-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .offer-btn {
+    align-self: stretch;
+    padding: 1rem 1.25rem;
+    font-size: 1.35rem;
+    text-align: center;
+  }
 }

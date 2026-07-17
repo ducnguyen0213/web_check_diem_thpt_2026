@@ -1,10 +1,9 @@
 import { Component, computed, input } from '@angular/core';
 import {
-  COMBINATIONS,
+  DISCOUNT_TIERS,
   FOREIGN_LANGUAGES,
   PROVINCES,
   ScoreRecord,
-  SUBJECT_LABELS,
   SUBJECTS,
 } from '../core/constants';
 
@@ -13,18 +12,14 @@ interface SubjectRow {
   score: number;
 }
 
-interface CombinationRow {
-  code: string;
-  detail: string;
-  total: number;
-}
-
 @Component({
   selector: 'app-score-card',
   templateUrl: './score-card.html',
   styleUrl: './score-card.css',
 })
 export class ScoreCard {
+  readonly shopUrl = 'https://hoanglongcomputer.vn/';
+
   readonly sbd = input.required<string>();
   readonly record = input.required<ScoreRecord>();
 
@@ -53,18 +48,11 @@ export class ScoreCard {
     return sum / rows.length;
   });
 
-  /** Các tổ hợp xét tuyển thí sinh có đủ 3 môn, xếp giảm dần theo tổng điểm */
-  readonly combinations = computed<CombinationRow[]>(() => {
-    const record = this.record();
-    return COMBINATIONS.filter((c) =>
-      c.subjects.every((key) => record[key] !== undefined),
-    )
-      .map((c) => ({
-        code: c.code,
-        detail: c.subjects.map((key) => SUBJECT_LABELS[key]).join(' + '),
-        total: c.subjects.reduce((sum, key) => sum + record[key]!, 0),
-      }))
-      .sort((a, b) => b.total - a.total);
+  /** Mức giảm giá áp dụng theo điểm trung bình */
+  readonly activeDiscount = computed(() => {
+    const average = this.average();
+    if (average === null) return null;
+    return DISCOUNT_TIERS.find((tier) => this.matchesTier(average, tier)) ?? null;
   });
 
   formatScore(value: number): string {
@@ -72,5 +60,18 @@ export class ScoreCard {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     });
+  }
+
+  formatCurrency(value: number): string {
+    return `${value.toLocaleString('vi-VN')}đ`;
+  }
+
+  private matchesTier(
+    average: number,
+    tier: (typeof DISCOUNT_TIERS)[number],
+  ): boolean {
+    if (tier.max === 10) return average >= tier.min && average <= tier.max;
+    if (tier.max === 7.0) return average < tier.max;
+    return average >= tier.min && average < tier.max;
   }
 }

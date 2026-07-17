@@ -70,6 +70,15 @@ export const PROVINCES: Record<string, string> = {
   '96': 'Cà Mau',
 };
 
+/** Mức giảm giá theo điểm trung bình (Hoàng Long Computer) */
+export const DISCOUNT_TIERS = [
+  { min: 9.5, max: 10, label: 'Từ 9,5 đến 10 điểm', shortLabel: '≥ 9,5', amount: 5_000_000 },
+  { min: 9.0, max: 9.5, label: 'Từ 9,0 đến dưới 9,5 điểm', shortLabel: '9,0 – 9,49', amount: 3_000_000 },
+  { min: 8.0, max: 9.0, label: 'Từ 8,0 đến dưới 9,0 điểm', shortLabel: '8,0 – 8,99', amount: 600_000 },
+  { min: 7.0, max: 8.0, label: 'Từ 7,0 đến dưới 8,0 điểm', shortLabel: '7,0 – 7,99', amount: 500_000 },
+  { min: 0, max: 7.0, label: 'Dưới 7,0 điểm', shortLabel: '< 7,0', amount: 300_000 },
+] as const;
+
 /** Các tổ hợp xét tuyển đại học thông dụng */
 export const COMBINATIONS: { code: string; subjects: SubjectKey[] }[] = [
   { code: 'A00', subjects: ['toan', 'ly', 'hoa'] },
