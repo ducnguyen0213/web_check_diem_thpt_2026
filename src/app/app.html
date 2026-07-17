@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" [class.embedded]="embed()">
   @if (!embed()) {
     <header class="hero">
       <h1>Tra cứu điểm thi tốt nghiệp THPT 2026</h1>
@@ -7,7 +7,8 @@
   }
 
   <main class="content">
-    <form class="search-box" (submit)="$event.preventDefault(); search()">
+    @if (!hideForm()) {
+      <form class="search-box" (submit)="$event.preventDefault(); search()">
       <input
         type="text"
         inputmode="numeric"
@@ -24,10 +25,11 @@
           Tra cứu
         }
       </button>
-    </form>
+      </form>
 
-    @if (sbd().length > 0 && !isValid) {
-      <p class="hint">Số báo danh gồm đúng 8 chữ số ({{ sbd().length }}/8)</p>
+      @if (sbd().length > 0 && !isValid) {
+        <p class="hint">Số báo danh gồm đúng 8 chữ số ({{ sbd().length }}/8)</p>
+      }
     }
 
     @switch (status()) {

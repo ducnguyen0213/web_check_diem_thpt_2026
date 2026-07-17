@@ -29,6 +29,12 @@
   flex: 1;
 }
 
+/* Chế độ nhúng: không còn hero phía trên nên bỏ margin âm, cột rộng hơn */
+.embedded .content {
+  width: min(720px, 100% - 2rem);
+  margin-top: 0.5rem;
+}
+
 .search-box {
   display: flex;
   gap: 0.5rem;
