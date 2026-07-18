@@ -92,9 +92,17 @@ export class App {
       const result = await this.scoreService.lookup(sbd);
       this.resultSbd.set(sbd);
       if (result.status === 'found') {
-        void this.participantService.recordLookup(sbd);
         this.record.set(result.record);
         this.status.set('found');
+        void this.participantService.recordLookup(sbd).then(() => {
+          if (this.embed()) {
+            // Báo cho trang cha (vd. LadiPage) cập nhật số thí sinh ngay khi tra cứu thành công
+            window.parent.postMessage(
+              { type: 'diemthi-participant-count', count: this.participantService.count() },
+              '*',
+            );
+          }
+        });
       } else {
         this.record.set(null);
         this.status.set('notfound');
