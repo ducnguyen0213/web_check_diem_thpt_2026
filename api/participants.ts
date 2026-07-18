@@ -23,11 +23,28 @@ async function kv(...command: string[]): Promise<unknown> {
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+      // Chỉ trả về số đếm (không nhạy cảm) nên cho phép mọi origin gọi,
+      // để trang ngoài nhúng iframe (vd. LadiPage) cũng hiển thị được số này.
+      'Access-Control-Allow-Origin': '*',
+    },
   });
 }
 
 export default async function handler(req: Request): Promise<Response> {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    });
+  }
+
   if (!KV_URL || !KV_TOKEN) {
     return json({ error: 'KV not configured' }, 500);
   }

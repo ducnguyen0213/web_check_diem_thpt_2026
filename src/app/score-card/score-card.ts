@@ -23,6 +23,8 @@ export class ScoreCard {
   readonly sbd = input.required<string>();
   readonly record = input.required<ScoreRecord>();
   readonly participantCount = input(0);
+  /** Ẩn dòng số thí sinh khi trang ngoài (nhúng iframe) đã tự hiển thị số này rồi */
+  readonly hideParticipantCount = input(false);
 
   /** Tên tỉnh/thành theo 2 chữ số đầu SBD (hội đồng thi) */
   readonly province = computed<string | null>(

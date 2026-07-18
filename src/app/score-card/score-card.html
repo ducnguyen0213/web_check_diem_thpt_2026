@@ -48,7 +48,7 @@
           Với điểm trung bình <strong class="offer-highlight">{{ formatScore(average) }}</strong>
           • Áp dụng tại <strong class="offer-highlight">Hoàng Long Computer</strong>
         </p>
-        @if (participantCount() > 0) {
+        @if (!hideParticipantCount() && participantCount() > 0) {
           <p class="offer-participants">
             Có
             <strong class="offer-participants-count">{{ participantCount().toLocaleString('vi-VN') }}</strong>
