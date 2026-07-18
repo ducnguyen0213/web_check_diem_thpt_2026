@@ -22,6 +22,7 @@ export class ScoreCard {
 
   readonly sbd = input.required<string>();
   readonly record = input.required<ScoreRecord>();
+  readonly participantCount = input(0);
 
   /** Tên tỉnh/thành theo 2 chữ số đầu SBD (hội đồng thi) */
   readonly province = computed<string | null>(

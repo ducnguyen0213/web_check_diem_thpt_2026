@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ScoreRecord } from './core/constants';
+import { ParticipantService } from './core/participant.service';
 import { ScoreService } from './core/score.service';
 import { ScoreCard } from './score-card/score-card';
 
@@ -13,6 +14,7 @@ type Status = 'idle' | 'loading' | 'found' | 'notfound' | 'error';
 })
 export class App {
   private readonly scoreService = inject(ScoreService);
+  private readonly participantService = inject(ParticipantService);
 
   protected readonly sbd = signal('');
   protected readonly status = signal<Status>('idle');
@@ -21,6 +23,7 @@ export class App {
   protected readonly resultSbd = signal('');
 
   protected readonly currentYear = new Date().getFullYear();
+  protected readonly participantCount = this.participantService.count;
 
   /** Chế độ nhúng (?embed=1): ẩn tiêu đề và footer khi đặt trong iframe */
   protected readonly embed = signal(false);
@@ -89,6 +92,7 @@ export class App {
       const result = await this.scoreService.lookup(sbd);
       this.resultSbd.set(sbd);
       if (result.status === 'found') {
+        void this.participantService.recordLookup(sbd);
         this.record.set(result.record);
         this.status.set('found');
       } else {

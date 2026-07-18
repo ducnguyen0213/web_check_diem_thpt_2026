@@ -34,7 +34,11 @@
 
     @switch (status()) {
       @case ('found') {
-        <app-score-card [sbd]="resultSbd()" [record]="record()!" />
+        <app-score-card
+          [sbd]="resultSbd()"
+          [record]="record()!"
+          [participantCount]="participantCount()"
+        />
       }
       @case ('notfound') {
         <div class="message message-warn">
